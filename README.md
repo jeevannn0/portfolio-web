@@ -1,17 +1,21 @@
 <h1 align="center">
-
-[![My logo](https://i.ibb.co/N9P8SVS/93836368586.png)](https://jeevan-portfolio-ts.vercel.app/)
 </h1>
 <p align="center">
   A portfolio website i.e. <a href="https://jeevan-portfolio-ts.vercel.app/" target="_blank">jeevan-portfolio-ts.vercel.app</a> built with <a href="https://nextjs.org/" target="_blank">Next.js</a> and hosted with <a href="https://vercel.com/" target="_blank">Vercel</a>
 </p>
 
-
-
 <br>
 
 [![My Portfolio](https://iili.io/JpAE80P.png)](https://jeevan-portfolio-ts.vercel.app/)
 
+## Tasks
+
+- [✅] Technology Stack : typescript.
+- [✅] Design : modern design, Responsive(desktops, tablets, and smartphones).
+- [✅] Content : introduction, about me, projects, and contact information.
+- [✅] Features : google authentication, Contact Form.
+- [✅] User Experience : smooth navigation, transitions.
+- [✅] Deployment : [![Vercel.]](https://jeevan-portfolio-ts.vercel.app/)
 
 ## Sections
 
