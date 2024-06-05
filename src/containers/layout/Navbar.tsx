@@ -1,33 +1,27 @@
-'use client';
+"use client";
+import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import { useAuth0 } from "@auth0/auth0-react";
+import Link from 'next/link';
+
 import { navbarSection } from '@/lib/content/navbar';
 import { author } from '@/lib/content/portfolio';
 import useWindowWidth from '@/lib/hooks/use-window-width';
 import { getBreakpointsWidth } from '@/lib/utils/helper';
 
 import { Button, DarkModeButton, Link as CLink, NavButton } from '@/components';
-
 import { fadeIn, slideIn } from '@/styles/animations';
 
-import { motion } from 'framer-motion';
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import '@/styles/glow.css';  // Import the CSS file for the glow effect
 
 /**
  * Hides the navbar while scrolling down
- * @param {Object} config
- * @param {String} [config.id=navbar] - id of navbar
- * @param {Number} [config.offset=100] - offset of navbar in px
+ * @param {Object} config - configuration object
+ * @param {String} [config.id=navbar] - ID of navbar
+ * @param {Number} [config.offset=100] - Offset of navbar in px
+ * @param {Boolean} config.when - Condition to hide navbar
  */
-
-const hideNavWhileScrolling = ({
-  id = 'navbar',
-  offset = 100,
-  when = true,
-}: {
-  id?: string;
-  offset?: number;
-  when: boolean;
-}) => {
+const hideNavWhileScrolling = ({ id = 'navbar', offset = 100, when }: { id?: string; offset?: number; when: boolean }) => {
   const nav = document.getElementById(id);
   if (!nav) return;
 
@@ -36,8 +30,7 @@ const hideNavWhileScrolling = ({
   window.onscroll = () => {
     if (when) {
       const curScrollPos = window.pageYOffset;
-      if (prevScrollPos < curScrollPos) nav.style.top = `-${offset}px`;
-      else nav.style.top = '0';
+      nav.style.top = prevScrollPos < curScrollPos ? `-${offset}px` : '0';
       prevScrollPos = curScrollPos;
     }
   };
@@ -51,27 +44,16 @@ type NavItemsProps = {
   onClick?: (event: React.MouseEvent) => void;
 };
 
-const NavItem = ({ href, children, onClick, index, delay }: NavItemsProps) => {
-  return (
-    <motion.li
-      className="group"
-      variants={slideIn({ delay: delay + index / 10, direction: 'down' })}
-      initial="hidden"
-      animate="show"
-    >
-      <CLink
-        href={href || `/#${children}`}
-        className="block p-2 duration-500 hover:text-accent"
-        onClick={onClick}
-        withPadding
-      >
-        {children}
-      </CLink>
-    </motion.li>
-  );
-};
+const NavItem = ({ href, children, onClick, index, delay }: NavItemsProps) => (
+  <motion.li className="group" variants={slideIn({ delay: delay + index / 10, direction: 'down' })} initial="hidden" animate="show">
+    <CLink href={href || `/#${children}`} className="block p-2 duration-500 hover:text-accent" onClick={onClick} withPadding>
+      {children}
+    </CLink>
+  </motion.li>
+);
 
 const Navbar = () => {
+  const { user, loginWithRedirect, isAuthenticated, logout } = useAuth0();
   const { cta, navLinks } = navbarSection;
   const [navbarCollapsed, setNavbarCollapsed] = useState(false);
 
@@ -98,51 +80,35 @@ const Navbar = () => {
         </Link>
       </h1>
 
-      <NavButton
-        onClick={() => {
-          setNavbarCollapsed((prev) => !prev);
-        }}
-        navbarCollapsed={navbarCollapsed}
-        className="md:invisible"
-      />
+      <NavButton onClick={() => setNavbarCollapsed(prev => !prev)} navbarCollapsed={navbarCollapsed} className="md:invisible" />
 
       {(navbarCollapsed || windowWidth > md) && (
         <nav className="capitalize absolute text-sm duration-200 md:bg-transparent z-50 w-[90%] left-1/2 -translate-x-1/2 top-full h-max rounded-xl shadow-xl p-6 bg-bg-secondary md:blocks md:static md:w-auto md:left-auto md:transform-none md:top-auto md:rounded-none md:shadow-none md:p-0 md:h-auto">
           <ul className="flex flex-col items-stretch gap-3 list-style-none lg:gap-5 xl:gap-6 md:flex-row md:items-center">
             {navLinks.map(({ name, url }, i) => (
-              <NavItem
-                key={i}
-                href={url}
-                index={i}
-                delay={ANIMATION_DELAY}
-                onClick={() => setNavbarCollapsed(false)}
-              >
+              <NavItem key={i} href={url} index={i} delay={ANIMATION_DELAY} onClick={() => setNavbarCollapsed(false)}>
                 {name}
               </NavItem>
             ))}
 
             <div className="flex items-center justify-between gap-5 xl:gap-6">
               {cta && (
-                <Button
-                  type="link"
-                  href={cta.url}
-                  sameTab={cta?.sameTab}
-                  variants={slideIn({
-                    delay: ANIMATION_DELAY + navLinks.length / 10,
-                    direction: 'down',
-                  })}
-                  initial="hidden"
-                  animate="show"
-                >
-                  {cta.title}
-                </Button>
+                <div className="flex items-center gap-5">
+                  {isAuthenticated && <h3 className="glow-text">Hy, {user?.name}</h3>}
+                  <Button
+                    // ameTab={cta?.sameTab}
+                    variants={slideIn({ delay: ANIMATION_DELAY + navLinks.length / 10, direction: 'down' })}
+                    initial="hidden"
+                    animate="show"
+                    onClick={isAuthenticated ? () => logout({ logoutParams: { returnTo: window.location.origin } }) : () => loginWithRedirect()}
+                  >
+                    {isAuthenticated ? 'Log Out' : 'Login'}
+                  </Button>
+                </div>
               )}
               <DarkModeButton
                 onClick={() => setNavbarCollapsed(false)}
-                variants={slideIn({
-                  delay: ANIMATION_DELAY + (navLinks.length + 1) / 10,
-                  direction: 'down',
-                })}
+                variants={slideIn({ delay: ANIMATION_DELAY + (navLinks.length + 1) / 10, direction: 'down' })}
                 initial="hidden"
                 animate="show"
               />

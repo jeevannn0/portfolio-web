@@ -1,3 +1,7 @@
+
+"use client"
+
+import { Auth0Provider } from '@auth0/auth0-react';
 import {
   About,
   Contact,
@@ -9,22 +13,25 @@ import {
 
 import type { NextPage } from 'next';
 
-/**
- * TODO: Create separate page for all the projects with filters (vercel | netlify | github api for automation)
- * TODO: Switch to next13 app dir feature, when lottie files start working in app dir
- * TODO: Try test cases
- */
-
 const Home: NextPage = () => {
   return (
     <>
-      <Layout>
-        <Hero />
-        <About />
-        <Skills />
-        <Projects />
-        <Contact />
-      </Layout>
+      <Auth0Provider
+        domain="dev-7hl8rw07vhindcpd.us.auth0.com"
+        clientId="LglRoyCgeMjFeBWZoOBk72Ric4H1u5jQ"
+        authorizationParams={{
+          redirect_uri: window.location.origin
+        }}
+      >
+        <Layout>
+          
+          <Hero />
+          <About />
+          <Skills />
+          <Projects />
+          <Contact />
+        </Layout>
+      </Auth0Provider>
     </>
   );
 };
