@@ -1,5 +1,5 @@
 <h1 align="center">
-  https://jeevan-portfolio-ts.vercel.app/
+  [!(https://i.ibb.co/N9P8SVS/93836368586.png)]
 </h1>
 <p align="center">
   A portfolio website i.e. <a href="https://jeevan-portfolio-ts.vercel.app/" target="_blank">jeevan-portfolio-ts.vercel.app</a> built with <a href="https://nextjs.org/" target="_blank">Next.js</a> and hosted with <a href="https://vercel.com/" target="_blank">Vercel</a>
@@ -11,16 +11,6 @@
 
 [![My Portfolio](https://iili.io/JpAE80P.png)](https://jeevan-portfolio-ts.vercel.app/)
 
-## Table of Contents
-
-- [Sections](#sections)
-- [Built With](#built-with)
-- [How to use](#how-to-use)
-- [Contributing](#contributing)
-- [Continuous Development](#continuous-development)
-- [Contact](#contact)
-- [Acknowledgements](#acknowledgements)
-- [Show Your Support](#show-your-support)
 
 ## Sections
 
