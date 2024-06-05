@@ -1,4 +1,5 @@
 "use client"
+
 import React, { useState } from 'react';
 import emailjs from '@emailjs/browser';
 import { contactSection } from '@/lib/content/contact';
@@ -12,7 +13,7 @@ const Contact = () => {
   const [formValues, setFormValues] = useState({ name: '', email: '', message: '' });
   const [formErrors, setFormErrors] = useState({ name: '', email: '', message: '' });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
   };
@@ -30,7 +31,7 @@ const Contact = () => {
     return !Object.values(errors).some(error => error);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (validateForm()) {
       const serviceId = 'service_deouikg';
@@ -124,15 +125,15 @@ const Contact = () => {
                   name="message"
                   id="message"
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-                  rows="4"
+                  rows={4}
                   value={formValues.message}
                   onChange={handleInputChange}
                 />
                 {formErrors.message && <p className="text-red-500 text-sm">{formErrors.message}</p>}
               </div>
               <button
-                type="submit"  className="mt-12  bg-purple-500 text-white py-1 px-2  w-5px rounded-md"
-
+                type="submit"
+                className="mt-12 bg-purple-500 text-white py-1 px-2 w-5px rounded-md"
               >
                 Submit
               </button>
