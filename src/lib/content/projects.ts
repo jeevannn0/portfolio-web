@@ -45,7 +45,7 @@ export const projectsSection: ProjectsSectionType = {
         id: getId(),
         name: 'weather app',
         url: 'https://weather-kv.netlify.app/',
-        repo: 'https://github.com/vatsalsinghkv/weather-app',
+        repo: 'https://github.com/jeevan/weather-app',
         img: 'https://user-images.githubusercontent.com/68834718/148419702-491fa08d-e520-4e2f-b219-374ec7118b2b.png',
         year: 2022,
         tags: ['Html', 'sass', 'JS', 'jQuery'],
