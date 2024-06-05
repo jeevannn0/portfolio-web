@@ -57,22 +57,15 @@
 3. Install dependencies
 
 ```bash
-  yarn
+  npm i
 ```
 
 4. Start the server
 
 ```bash
-  yarn dev
+  npm run dev
 ```
 
-- To change the content, edit `src/lib/content/`
-
-- To change the **resume**, change `/public/resume.pdf` with your resume (name must be `resume.pdf`)
-
-- To change the **About Section**, edit `src/containers/About.tsx`
-
-- To change the theme, edit `src/styles/globals.css`
 
 
 ## Acknowledgements
