@@ -14,6 +14,15 @@ import { fadeIn, slideIn } from '@/styles/animations';
 
 import '@/styles/glow.css';  // Import the CSS file for the glow effect
 
+// Custom hook to check if the component is mounted in the client
+const useIsClient = () => {
+  const [isClient, setIsClient] = useState(false);
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+  return isClient;
+};
+
 /**
  * Hides the navbar while scrolling down
  * @param {Object} config - configuration object
@@ -22,7 +31,7 @@ import '@/styles/glow.css';  // Import the CSS file for the glow effect
  * @param {Boolean} config.when - Condition to hide navbar
  */
 const hideNavWhileScrolling = ({ id = 'navbar', offset = 100, when }: { id?: string; offset?: number; when: boolean }) => {
-  if (typeof window === 'undefined') return;  // Check for the presence of window
+  if (typeof window === 'undefined') return;  // Ensure we are in the client-side environment
   const nav = document.getElementById(id);
   if (!nav) return;
 
@@ -54,6 +63,7 @@ const NavItem = ({ href, children, onClick, index, delay }: NavItemsProps) => (
 );
 
 const Navbar = () => {
+  const isClient = useIsClient();
   const { user, loginWithRedirect, isAuthenticated, logout } = useAuth0();
   const { cta, navLinks } = navbarSection;
   const [navbarCollapsed, setNavbarCollapsed] = useState(false);
@@ -63,8 +73,14 @@ const Navbar = () => {
   const ANIMATION_DELAY = windowWidth <= md ? 0 : 0.8;
 
   useEffect(() => {
-    hideNavWhileScrolling({ when: !navbarCollapsed });
-  }, [navbarCollapsed]);
+    if (isClient) {
+      hideNavWhileScrolling({ when: !navbarCollapsed });
+    }
+  }, [isClient, navbarCollapsed]);
+
+  if (!isClient) {
+    return null; // Return null during SSR to avoid window access errors
+  }
 
   return (
     <motion.header
