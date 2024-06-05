@@ -22,6 +22,7 @@ import '@/styles/glow.css';  // Import the CSS file for the glow effect
  * @param {Boolean} config.when - Condition to hide navbar
  */
 const hideNavWhileScrolling = ({ id = 'navbar', offset = 100, when }: { id?: string; offset?: number; when: boolean }) => {
+  if (typeof window === 'undefined') return;  // Check for the presence of window
   const nav = document.getElementById(id);
   if (!nav) return;
 
