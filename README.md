@@ -15,7 +15,7 @@
 - [✅] Content : introduction, about me, projects, and contact information.
 - [✅] Features : google authentication, Contact Form.
 - [✅] User Experience : smooth navigation, transitions.
-- [✅] Deployment : [![Vercel.]](https://jeevan-portfolio-ts.vercel.app/)
+- [✅] Deployment : [Vercel.](https://jeevan-portfolio-ts.vercel.app/)
 
 ## Sections
 
