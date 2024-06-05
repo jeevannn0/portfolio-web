@@ -10,7 +10,7 @@ export const navbarSection: NavbarSectionType = {
         { name: 'contact', url: '/#contact' },
     ],
     cta: {
-        title: 'resume',
+        title: 'Login',
         url: `/${resumeFileName}`,
     },
 }
