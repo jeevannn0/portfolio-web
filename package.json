@@ -13,6 +13,7 @@
   "dependencies": {
     "-": "^0.0.1",
     "@auth0/auth0-react": "^2.2.4",
+    "@emailjs/browser": "^4.3.3",
     "@lottiefiles/react-lottie-player": "^3.5.0",
     "clsx": "^2.0.0",
     "framer-motion": "^9.0.3",
