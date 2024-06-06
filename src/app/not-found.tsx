@@ -7,7 +7,7 @@ const NotFound = () => {
       <div className="w-full max-w-xl text-center">
       
         <p className="mt-5 text-3xl capitalize md:text-4xl text-dark-2">
-          Sus, Entered the wrong page
+          SuS, Entered the wrong page
         </p>
 
         <Button type="link" href="/" size="lg" className="mt-20" sameTab center>
